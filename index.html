@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Quản lý · Dark Feminine & Hmind</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main id="login" class="login" hidden>
+  <form id="login-form" class="login-card" autocomplete="on">
+    <h1>Quản lý</h1>
+    <p class="muted">Dark Feminine · Hmind English</p>
+    <label>Tên đăng nhập
+      <input name="user" autocomplete="username" required>
+    </label>
+    <label>Key
+      <input name="key" type="password" autocomplete="current-password" required>
+    </label>
+    <label id="api-field" hidden>Địa chỉ Apps Script (chỉ nhập lần đầu)
+      <input name="api" type="url" placeholder="https://script.google.com/macros/s/.../exec">
+    </label>
+    <button type="submit">Đăng nhập</button>
+    <p id="login-error" class="error" role="alert"></p>
+  </form>
+</main>
+
+<div id="app" hidden>
+  <header class="top">
+    <div class="brand">Quản lý <span class="muted">Dark Feminine · Hmind</span></div>
+    <div class="top-actions">
+      <span id="sync-info" class="muted small"></span>
+      <button id="btn-sync" class="ghost">Đồng bộ ngay</button>
+      <button id="btn-logout" class="ghost">Đăng xuất</button>
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs">
+    <button data-tab="overview" class="active">Tổng quan</button>
+    <button data-tab="dfOrders">DF · Đơn hàng</button>
+    <button data-tab="dfMembers">DF · Thành viên</button>
+    <button data-tab="hmPayments">Hmind · Thu học phí</button>
+    <button data-tab="hmEnrollments">Hmind · Khoá đăng ký</button>
+    <button data-tab="hmLeads">Hmind · Khách tư vấn</button>
+  </nav>
+
+  <section id="view" class="view"></section>
+</div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
