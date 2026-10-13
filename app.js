@@ -179,7 +179,32 @@ function showApp() {
   $("#login").hidden = true;
   $("#app").hidden = false;
   render();
+  refreshIfStale();
 }
+
+// The Sheet's 15-minute trigger only exists once setup() has been run in the
+// Apps Script editor; without it, pull fresh data whenever the page is opened
+// on numbers older than 10 minutes.
+const STALE_MS = 10 * 60 * 1000;
+async function refreshIfStale() {
+  const last = data && data.syncedAt ? new Date(data.syncedAt).getTime() : 0;
+  if (Date.now() - last < STALE_MS) return;
+  const btn = $("#btn-sync");
+  btn.disabled = true;
+  btn.textContent = "Đang cập nhật…";
+  try {
+    data = await call("sync");
+    render();
+  } catch {
+    // keep showing the last synced numbers
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Đồng bộ ngay";
+  }
+}
+setInterval(() => {
+  if (creds && data && !document.hidden) refreshIfStale();
+}, 60 * 1000);
 
 // ---------------------------------------------------------------- views
 
